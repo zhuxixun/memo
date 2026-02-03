@@ -259,7 +259,10 @@ function App() {
 
       {/* 便签列表 - 简洁设计 */}
       {notes.length > 0 && (
-        <div className="flex items-center gap-1 px-2 py-1 border-b border-white/5 overflow-x-auto">
+        <div
+          className="flex items-center gap-1 px-2 py-1 border-b border-white/5 overflow-x-auto"
+          style={{ WebkitAppRegion: 'no-drag' }}
+        >
           {notes.map(note => (
             <div
               key={note.id}
