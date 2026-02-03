@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // 配置操作
   getConfig: () => ipcRenderer.invoke('get-config'),
   setOpacity: (opacity) => ipcRenderer.invoke('set-opacity', opacity),
+  setFontSize: (fontSize) => ipcRenderer.invoke('set-font-size', fontSize),
   setAutoLaunch: (enable) => ipcRenderer.invoke('set-auto-launch', enable),
   getAutoLaunch: () => ipcRenderer.invoke('get-auto-launch')
 })

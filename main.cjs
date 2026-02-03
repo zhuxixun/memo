@@ -22,6 +22,7 @@ function readWindowConfig() {
     height: 400,
     hotkey: 'CommandOrControl+`',
     opacity: 0.8,
+    fontSize: 14,
     autoLaunch: false
   }
 }
@@ -284,6 +285,13 @@ ipcMain.handle('get-global-hotkey', () => {
 // 获取配置
 ipcMain.handle('get-config', () => {
   return readWindowConfig()
+})
+
+// 设置字体大小
+ipcMain.handle('set-font-size', (_, fontSize) => {
+  const config = readWindowConfig()
+  saveWindowConfig({ ...config, fontSize: Math.max(12, Math.min(24, fontSize)) })
+  return true
 })
 
 // 设置透明度

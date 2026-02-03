@@ -21,6 +21,7 @@ function App() {
   const [globalHotkey, setGlobalHotkey] = useState('Ctrl+`')
   const [isRecordingHotkey, setIsRecordingHotkey] = useState(false)
   const [opacity, setOpacity] = useState(0.8)
+  const [fontSize, setFontSize] = useState(14)
   const [showSettings, setShowSettings] = useState(false)
   const recordingKeyRef = useRef([])
   const textareaRef = useRef(null)
@@ -45,6 +46,7 @@ function App() {
     const config = await window.electronAPI?.getConfig()
     if (config) {
       setOpacity(config.opacity || 0.8)
+      setFontSize(config.fontSize || 14)
       setGlobalHotkey(formatHotkey(config.hotkey) || 'Ctrl+`')
     }
   }
@@ -117,6 +119,12 @@ function App() {
     const newOpacity = parseFloat(e.target.value)
     setOpacity(newOpacity)
     await window.electronAPI?.setOpacity(newOpacity)
+  }
+
+  const handleFontSizeChange = async (e) => {
+    const newFontSize = parseInt(e.target.value)
+    setFontSize(newFontSize)
+    await window.electronAPI?.setFontSize(newFontSize)
   }
 
   const handleContentChange = useCallback((e) => {
@@ -220,6 +228,21 @@ function App() {
           </div>
 
           <div className="mb-3">
+            <label className="text-xs text-gray-400 block mb-1">
+              字体大小: {fontSize}px
+            </label>
+            <input
+              type="range"
+              min="12"
+              max="24"
+              step="1"
+              value={fontSize}
+              onChange={handleFontSizeChange}
+              className="w-full h-1 bg-gray-600 rounded appearance-none cursor-pointer"
+            />
+          </div>
+
+          <div className="mb-3">
             <label className="text-xs text-gray-400 block mb-1">快捷键</label>
             <button
               onClick={() => setIsRecordingHotkey(true)}
@@ -283,7 +306,8 @@ function App() {
           value={activeNote?.content || ''}
           onChange={handleContentChange}
           placeholder="输入便签内容..."
-          className="w-full h-full bg-transparent text-sm resize-none focus:outline-none placeholder-gray-500/50 overflow-y-auto scrollbar-hide"
+          className="w-full h-full bg-transparent resize-none focus:outline-none placeholder-gray-500/50 overflow-y-auto scrollbar-hide"
+          style={{ fontSize: `${fontSize}px` }}
           spellCheck={false}
           autoFocus
         />
