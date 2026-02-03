@@ -130,11 +130,15 @@ function registerGlobalHotkey(hotkey) {
   if (hotkey && win) {
     const ret = globalShortcut.register(hotkey, () => {
       if (win) {
-        if (win.isMinimized()) {
-          win.restore()
+        if (win.isVisible()) {
+          win.hide()
+        } else {
+          if (win.isMinimized()) {
+            win.restore()
+          }
+          win.focus()
+          win.show()
         }
-        win.focus()
-        win.show()
       }
     })
     if (!ret) {
