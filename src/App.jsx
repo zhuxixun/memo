@@ -273,7 +273,10 @@ function App() {
       )}
 
       {/* 便签内容编辑区域 */}
-      <div className="flex-1 p-3 overflow-hidden flex flex-col">
+      <div
+        className="flex-1 p-3 overflow-hidden flex flex-col"
+        style={{ WebkitAppRegion: 'no-drag' }}
+      >
         <textarea
           key={activeNoteId}
           ref={textareaRef}
