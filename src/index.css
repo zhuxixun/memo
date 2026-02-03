@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* 窗口拖动区域 */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+/* 拖动区域内的按钮不需要拖动 */
+.drag-region button {
+  -webkit-app-region: no-drag;
+}
