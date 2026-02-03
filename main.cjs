@@ -156,7 +156,12 @@ function setAutoLaunch(enable) {
   }
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  // 注册默认全局快捷键
+  const config = readWindowConfig()
+  registerGlobalHotkey(config.hotkey)
+})
 
 // 窗口控制
 ipcMain.on('window-minimize', () => {

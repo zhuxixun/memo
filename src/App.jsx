@@ -35,7 +35,10 @@ function App() {
     const data = await window.electronAPI?.getNotes()
     if (data && data.length > 0) {
       setNotes(data)
-      setActiveNoteId(data[0].id)
+      // 只在没有选中的便签时设置第一个
+      if (!activeNoteId || !data.find(n => n.id === activeNoteId)) {
+        setActiveNoteId(data[0].id)
+      }
     }
   }
 
@@ -147,12 +150,6 @@ function App() {
 
   const handleDeleteNote = async (noteId, e) => {
     e.stopPropagation()
-    if (notes.length <= 1) {
-      const clearedNote = { id: noteId, content: '' }
-      await window.electronAPI?.saveNote(clearedNote)
-      setNotes(prev => prev.map(n => n.id === noteId ? clearedNote : n))
-      return
-    }
     await window.electronAPI?.deleteNote(noteId)
     await loadNotes()
   }
@@ -261,7 +258,7 @@ function App() {
       )}
 
       {/* 便签列表 - 简洁设计 */}
-      {notes.length > 1 && (
+      {notes.length > 0 && (
         <div className="flex items-center gap-1 px-2 py-1 border-b border-white/5 overflow-x-auto">
           {notes.map(note => (
             <div
@@ -294,12 +291,14 @@ function App() {
       {/* 便签内容编辑区域 */}
       <div className="flex-1 p-3 overflow-hidden flex flex-col">
         <textarea
+          key={activeNoteId}
           ref={textareaRef}
           value={activeNote?.content || ''}
           onChange={handleContentChange}
           placeholder="输入便签内容..."
           className="w-full h-full bg-transparent text-sm resize-none focus:outline-none placeholder-gray-500/50"
           spellCheck={false}
+          autoFocus
         />
       </div>
 
