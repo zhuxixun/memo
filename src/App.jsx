@@ -162,8 +162,11 @@ function App() {
     window.electronAPI?.windowMaximize()
   }
 
-  const handleClose = () => {
-    window.electronAPI?.windowClose()
+  const handleClose = async () => {
+    if (activeNoteId) {
+      await window.electronAPI?.deleteNote(activeNoteId)
+      await loadNotes()
+    }
   }
 
   const handleToggleAlwaysOnTop = () => {
@@ -339,6 +342,13 @@ function App() {
         </span>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={handleClose}
+            className="text-xs px-2 py-0.5 rounded text-gray-500 hover:text-red-400 hover:bg-white/5"
+            title="删除便签"
+          >
+            ×
+          </button>
           {notes.length <= 1 && (
             <button
               onClick={handleCreateNote}
