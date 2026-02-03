@@ -18,7 +18,7 @@ function App() {
   const [notes, setNotes] = useState([])
   const [activeNoteId, setActiveNoteId] = useState(null)
   const [isAlwaysOnTop, setIsAlwaysOnTop] = useState(false)
-  const [globalHotkey, setGlobalHotkey] = useState('Ctrl+`')
+  const [globalHotkey, setGlobalHotkey] = useState('Ctrl+\\')
   const [isRecordingHotkey, setIsRecordingHotkey] = useState(false)
   const [opacity, setOpacity] = useState(0.8)
   const [fontSize, setFontSize] = useState(14)
@@ -47,7 +47,7 @@ function App() {
     if (config) {
       setOpacity(config.opacity || 0.8)
       setFontSize(config.fontSize || 14)
-      setGlobalHotkey(formatHotkey(config.hotkey) || 'Ctrl+`')
+      setGlobalHotkey(formatHotkey(config.hotkey) || 'Ctrl+\\')
     }
   }
 
@@ -234,7 +234,7 @@ function App() {
             <input
               type="range"
               min="12"
-              max="24"
+              max="96"
               step="1"
               value={fontSize}
               onChange={handleFontSizeChange}

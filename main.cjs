@@ -20,7 +20,7 @@ function readWindowConfig() {
     y: undefined,
     width: 300,
     height: 400,
-    hotkey: 'CommandOrControl+`',
+    hotkey: 'CommandOrControl+\\',
     opacity: 0.8,
     fontSize: 14,
     autoLaunch: false
