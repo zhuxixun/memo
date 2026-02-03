@@ -207,7 +207,10 @@ function App() {
 
       {/* 设置面板 */}
       {showSettings && (
-        <div className="bg-black/50 border-b border-white/10 p-3">
+        <div
+          className="bg-black/50 border-b border-white/10 p-3"
+          style={{ WebkitAppRegion: 'no-drag' }}
+        >
           <h3 className="text-xs font-medium mb-3 text-gray-300">设置</h3>
 
           <div className="mb-3">
