@@ -165,7 +165,7 @@ function App() {
 
   return (
     <div
-      className="h-screen flex flex-col text-white drag-region"
+      className="h-screen flex flex-col text-white drag-region overflow-hidden"
       style={{ backgroundColor: `rgba(0, 0, 0, ${opacity})` }}
     >
       {/* 标题栏 - 极简设计 */}
@@ -199,7 +199,7 @@ function App() {
       {/* 设置面板 */}
       {showSettings && (
         <div
-          className="bg-black/50 border-b border-white/10 p-3"
+          className="bg-black/50 border-b border-white/10 p-3 flex-shrink-0"
           style={{ WebkitAppRegion: 'no-drag' }}
         >
           <h3 className="text-xs font-medium mb-3 text-gray-300">设置</h3>
