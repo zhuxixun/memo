@@ -263,7 +263,10 @@ function App() {
           {notes.map(note => (
             <div
               key={note.id}
-              onClick={() => setActiveNoteId(note.id)}
+              onClick={(e) => {
+                e.stopPropagation()
+                setActiveNoteId(note.id)
+              }}
               className={`flex items-center gap-1 px-2 py-0.5 rounded cursor-pointer text-xs whitespace-nowrap transition-colors ${
                 note.id === activeNoteId
                   ? 'bg-white/10 text-white'
