@@ -95,30 +95,45 @@ function createWindow() {
   }
 
   win.on('move', () => {
-    if (win && !win.isMinimized() && !win.isMaximized()) {
-      const [x, y] = win.getPosition()
-      const [width, height] = win.getSize()
-      const opacity = win.getOpacity()
-      saveWindowConfig({ x, y, width, height, opacity })
+    try {
+      if (win && !win.isDestroyed() && !win.isMinimized() && !win.isMaximized()) {
+        const [x, y] = win.getPosition()
+        const [width, height] = win.getSize()
+        const opacity = win.getOpacity()
+        saveWindowConfig({ x, y, width, height, opacity })
+      }
+    } catch (e) {
+      // 忽略窗口已销毁的错误
     }
   })
 
   win.on('resize', () => {
-    if (win && !win.isMinimized() && !win.isMaximized()) {
-      const [x, y] = win.getPosition()
-      const [width, height] = win.getSize()
-      const opacity = win.getOpacity()
-      saveWindowConfig({ x, y, width, height, opacity })
+    try {
+      if (win && !win.isDestroyed() && !win.isMinimized() && !win.isMaximized()) {
+        const [x, y] = win.getPosition()
+        const [width, height] = win.getSize()
+        const opacity = win.getOpacity()
+        saveWindowConfig({ x, y, width, height, opacity })
+      }
+    } catch (e) {
+      // 忽略窗口已销毁的错误
+    }
+  })
+
+  win.on('close', () => {
+    try {
+      if (!win.isDestroyed()) {
+        const [x, y] = win.getPosition()
+        const [width, height] = win.getSize()
+        const opacity = win.getOpacity()
+        saveWindowConfig({ x, y, width, height, opacity })
+      }
+    } catch (e) {
+      // 忽略错误
     }
   })
 
   win.on('closed', () => {
-    if (win) {
-      const [x, y] = win.getPosition()
-      const [width, height] = win.getSize()
-      const opacity = win.getOpacity()
-      saveWindowConfig({ x, y, width, height, opacity })
-    }
     win = null
   })
 }
