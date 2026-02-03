@@ -274,8 +274,8 @@ function App() {
 
       {/* 便签内容编辑区域 */}
       <div
-        className="flex-1 p-3 overflow-hidden flex flex-col"
-        style={{ WebkitAppRegion: 'no-drag' }}
+        className="flex-1 p-3 flex flex-col"
+        style={{ WebkitAppRegion: 'no-drag', overflowY: 'auto' }}
       >
         <textarea
           key={activeNoteId}
@@ -283,7 +283,7 @@ function App() {
           value={activeNote?.content || ''}
           onChange={handleContentChange}
           placeholder="输入便签内容..."
-          className="w-full h-full bg-transparent text-sm resize-none focus:outline-none placeholder-gray-500/50"
+          className="w-full h-full bg-transparent text-sm resize-none focus:outline-none placeholder-gray-500/50 scrollbar-hide"
           spellCheck={false}
           autoFocus
         />

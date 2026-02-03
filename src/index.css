@@ -17,3 +17,13 @@ body {
 .drag-region button {
   -webkit-app-region: no-drag;
 }
+
+/* 隐藏滚动条 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
