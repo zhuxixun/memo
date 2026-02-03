@@ -21,7 +21,6 @@ function App() {
   const [globalHotkey, setGlobalHotkey] = useState('Ctrl+`')
   const [isRecordingHotkey, setIsRecordingHotkey] = useState(false)
   const [opacity, setOpacity] = useState(0.8)
-  const [autoLaunch, setAutoLaunch] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const recordingKeyRef = useRef([])
   const textareaRef = useRef(null)
@@ -48,8 +47,6 @@ function App() {
       setOpacity(config.opacity || 0.8)
       setGlobalHotkey(formatHotkey(config.hotkey) || 'Ctrl+`')
     }
-    const autoLaunchValue = await window.electronAPI?.getAutoLaunch()
-    setAutoLaunch(autoLaunchValue)
   }
 
   useEffect(() => {
@@ -120,12 +117,6 @@ function App() {
     const newOpacity = parseFloat(e.target.value)
     setOpacity(newOpacity)
     await window.electronAPI?.setOpacity(newOpacity)
-  }
-
-  const handleAutoLaunchChange = async (e) => {
-    const newValue = e.target.checked
-    setAutoLaunch(newValue)
-    await window.electronAPI?.setAutoLaunch(newValue)
   }
 
   const handleContentChange = useCallback((e) => {
@@ -239,22 +230,6 @@ function App() {
               }`}
             >
               {isRecordingHotkey ? '按下快捷键...' : globalHotkey}
-            </button>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-gray-400">开机自启动</label>
-            <button
-              onClick={handleAutoLaunchChange}
-              className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors ${
-                autoLaunch ? 'bg-blue-500' : 'bg-gray-600'
-              }`}
-            >
-              <span
-                className={`inline-block h-2 w-2 transform rounded-full bg-white transition-transform ${
-                  autoLaunch ? 'translate-x-4' : 'translate-x-1'
-                }`}
-              />
             </button>
           </div>
         </div>
