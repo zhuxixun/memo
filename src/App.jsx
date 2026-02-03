@@ -149,7 +149,7 @@ function App() {
   }
 
   const handleDeleteNote = async (noteId, e) => {
-    e.stopPropagation()
+    if (e) e.stopPropagation()
     await window.electronAPI?.deleteNote(noteId)
     await loadNotes()
   }
@@ -160,13 +160,6 @@ function App() {
 
   const handleMaximize = () => {
     window.electronAPI?.windowMaximize()
-  }
-
-  const handleDeleteNote = async () => {
-    if (activeNoteId) {
-      await window.electronAPI?.deleteNote(activeNoteId)
-      await loadNotes()
-    }
   }
 
   const handleAppClose = () => {
@@ -348,7 +341,7 @@ function App() {
         <div className="flex items-center gap-2">
           {notes.length > 1 && (
             <button
-              onClick={handleDeleteNote}
+              onClick={() => handleDeleteNote(activeNoteId)}
               className="text-xs px-2 py-0.5 rounded text-gray-500 hover:text-red-400 hover:bg-white/5"
               title="删除便签"
             >
