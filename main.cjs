@@ -95,6 +95,12 @@ function createWindow() {
     win.loadFile(path.join(__dirname, 'dist/index.html'))
   }
 
+  // 窗口加载完成后注册快捷键
+  win.webContents.on('did-finish-load', () => {
+    const config = readWindowConfig()
+    registerGlobalHotkey(config.hotkey)
+  })
+
   win.on('move', () => {
     try {
       if (win && !win.isDestroyed() && !win.isMinimized() && !win.isMaximized()) {
@@ -145,7 +151,7 @@ function registerGlobalHotkey(hotkey) {
 
   if (hotkey && win) {
     const ret = globalShortcut.register(hotkey, () => {
-      if (win) {
+      if (win && !win.isDestroyed()) {
         if (win.isVisible()) {
           win.hide()
         } else {
@@ -159,6 +165,8 @@ function registerGlobalHotkey(hotkey) {
     })
     if (!ret) {
       console.error('快捷键注册失败:', hotkey)
+    } else {
+      console.log('快捷键注册成功:', hotkey)
     }
   }
 }
@@ -178,12 +186,6 @@ function setAutoLaunch(enable) {
 
 app.whenReady().then(() => {
   createWindow()
-})
-
-// 在窗口创建完成后注册快捷键
-app.on('browser-window-created', () => {
-  const config = readWindowConfig()
-  registerGlobalHotkey(config.hotkey)
 })
 
 // 窗口控制
