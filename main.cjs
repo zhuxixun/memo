@@ -20,7 +20,7 @@ function readWindowConfig() {
     y: undefined,
     width: 300,
     height: 400,
-    hotkey: 'CommandOrControl+|',
+    hotkey: 'CommandOrControl+\\',
     opacity: 0.8,
     fontSize: 14,
     autoLaunch: false
@@ -284,7 +284,7 @@ ipcMain.handle('set-global-hotkey', (_, hotkey) => {
 // 获取当前全局快捷键
 ipcMain.handle('get-global-hotkey', () => {
   const config = readWindowConfig()
-  return config.hotkey || 'CommandOrControl+|'
+  return config.hotkey || 'CommandOrControl+\\'
 })
 
 // 获取配置
