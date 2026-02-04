@@ -293,7 +293,7 @@ ipcMain.handle('get-config', () => {
 // 设置字体大小
 ipcMain.handle('set-font-size', (_, fontSize) => {
   const config = readWindowConfig()
-  saveWindowConfig({ ...config, fontSize: Math.max(12, Math.min(24, fontSize)) })
+  saveWindowConfig({ ...config, fontSize: Math.max(12, Math.min(96, fontSize)) })
   return true
 })
 
