@@ -178,7 +178,10 @@ function setAutoLaunch(enable) {
 
 app.whenReady().then(() => {
   createWindow()
-  // 注册默认全局快捷键
+})
+
+// 在窗口创建完成后注册快捷键
+app.on('browser-window-created', () => {
   const config = readWindowConfig()
   registerGlobalHotkey(config.hotkey)
 })
