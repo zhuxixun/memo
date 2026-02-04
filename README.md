@@ -67,8 +67,13 @@ npm start
 
 ```
 ├── src/           # React 源码
+│   ├── App.jsx   # 主组件
+│   ├── main.jsx  # React 入口
+│   └── index.css  # 全局样式
 ├── main.cjs      # Electron 主进程
-├── preload.cjs   # 预加载脚本
+├── preload.cjs    # 预加载脚本
+├── index.html     # HTML 入口
 ├── vite.config.js
-└── tailwind.config.js
+├── tailwind.config.js
+└── postcss.config.js
 ```
