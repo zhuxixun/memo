@@ -297,7 +297,7 @@ function App() {
 
       {/* 便签内容编辑区域 */}
       <div
-        className="flex-1 p-3 flex flex-col"
+        className="flex-1 p-3 flex flex-col overflow-hidden"
         style={{ WebkitAppRegion: 'no-drag' }}
       >
         <textarea
