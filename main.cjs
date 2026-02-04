@@ -165,8 +165,6 @@ function registerGlobalHotkey(hotkey) {
     })
     if (!ret) {
       console.error('快捷键注册失败:', hotkey)
-    } else {
-      console.log('快捷键注册成功:', hotkey)
     }
   }
 }
