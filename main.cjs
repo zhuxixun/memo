@@ -107,7 +107,8 @@ function createWindow() {
         const [x, y] = win.getPosition()
         const [width, height] = win.getSize()
         const opacity = win.getOpacity()
-        saveWindowConfig({ x, y, width, height, opacity })
+        const config = readWindowConfig()
+        saveWindowConfig({ ...config, x, y, width, height, opacity })
       }
     } catch (e) {
       // 忽略窗口已销毁的错误
@@ -120,7 +121,8 @@ function createWindow() {
         const [x, y] = win.getPosition()
         const [width, height] = win.getSize()
         const opacity = win.getOpacity()
-        saveWindowConfig({ x, y, width, height, opacity })
+        const config = readWindowConfig()
+        saveWindowConfig({ ...config, x, y, width, height, opacity })
       }
     } catch (e) {
       // 忽略窗口已销毁的错误
@@ -133,7 +135,8 @@ function createWindow() {
         const [x, y] = win.getPosition()
         const [width, height] = win.getSize()
         const opacity = win.getOpacity()
-        saveWindowConfig({ x, y, width, height, opacity })
+        const config = readWindowConfig()
+        saveWindowConfig({ ...config, x, y, width, height, opacity })
       }
     } catch (e) {
       // 忽略错误
