@@ -24,16 +24,20 @@ Windows desktop sticky note application built with React + Tailwind CSS + Electr
 Renderer calls main process through `window.electronAPI`:
 - Window control: minimize, maximize, close, always-on-top toggle
 - Notes CRUD: `getNotes`, `saveNote`, `deleteNote`
-- Settings: `getConfig`, `setOpacity`, `setAutoLaunch`, global hotkey management
+- Settings: `getConfig`, `setOpacity`, `setFontSize`, global hotkey management
 
 ### Data Storage
 - `notes.json`: Array of note objects with id, content, hotkey, position, opacity
-- `window-config.json`: Window dimensions, position, default hotkey, opacity
-- Location: `app.getPath('userData')` (AppData on Windows)
+- `window-config.json`: Window dimensions, position, default hotkey, opacity, fontSize
+- Location: `%LOCALAPPDATA%\DesktopNote` (Windows)
 
 ### Key Components
 - `App.jsx`: Main UI with tabs, settings panel, textarea for note editing
 - Hotkey format: `CommandOrControl+Key` (electron-globalShortcut format)
+
+### UI Interactions
+- `-webkit-app-region: drag` enables window dragging
+- `-webkit-app-region: no-drag` needed on interactive elements (textarea, settings panel, tabs, scrollbars)
 
 ## Tech Stack
 
